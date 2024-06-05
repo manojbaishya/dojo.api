@@ -1,0 +1,16 @@
+meta {
+  name: Get Essay
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}{{api-service}}/essay?para=200&maxWaitTime=0
+  body: none
+  auth: none
+}
+
+query {
+  para: 200
+  maxWaitTime: 0
+}
