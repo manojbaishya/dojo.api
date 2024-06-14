@@ -1,3 +1,1 @@
-Test API project for k6 scripts at
-
-https://github.com/manojbaishya/k6-template-typescript
+https://learn.microsoft.com/en-in/aspnet/core/web-api/?view=aspnetcore-8.0
