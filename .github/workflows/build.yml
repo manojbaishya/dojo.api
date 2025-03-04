@@ -1,0 +1,23 @@
+name: Build Dojo.Api
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+    - name: Restore Nuget dependencies
+      run: dotnet restore dojo.api.sln
+    - name: Build Solution
+      run: dotnet build dojo.api.sln --no-restore
+    - name: Test Solution
+      run: dotnet test dojo.api.sln --no-build --verbosity normal
