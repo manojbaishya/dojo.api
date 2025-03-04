@@ -1,0 +1,26 @@
+version: '3'
+ 
+tasks:
+  build-debug:
+    cmds:
+      - dotnet build dojo.api.sln -c Debug
+  run-debug:
+    cmds:
+      - cd dojo.api/bin/Debug && dotnet dojo.api.dll
+    env:
+      ASPNETCORE_ENVIRONMENT: Development
+  build-release:
+    cmds:
+      - dotnet build dojo.api.sln -c Release
+  run-release:
+    cmds:
+      - cd dojo.api/bin/Release
+      - dotnet dojo.api.dll
+    env:
+      ASPNETCORE_ENVIRONMENT: Production
+  test:
+    cmds:
+      - dotnet test dojo.api.sln
+  clean:
+    cmds:
+      - dotnet clean dojo.api.sln

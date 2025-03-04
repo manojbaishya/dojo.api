@@ -1,0 +1,18 @@
+meta {
+  name: Update Todo
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{protocol}}://{{hostname}}{{port-or-apigw}}/api/Todo/1
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Task 1",
+    "isComplete": false
+  }
+}

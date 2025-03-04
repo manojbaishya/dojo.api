@@ -1,0 +1,11 @@
+meta {
+  name: Get OpenAPI Spec
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{protocol}}://{{hostname}}{{port-or-apigw}}/openapi/v1.json
+  body: none
+  auth: none
+}

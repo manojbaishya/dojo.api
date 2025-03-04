@@ -1,6 +1,0 @@
-@dojo.api.HostAddress = http://localhost:5294
-
-GET {{dojo.api.HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
