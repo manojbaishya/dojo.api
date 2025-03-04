@@ -18,6 +18,9 @@ tasks:
       - dotnet dojo.api.dll
     env:
       ASPNETCORE_ENVIRONMENT: Production
+  publish:
+    cmds:
+      - dotnet publish dojo.api.sln -c Release
   test:
     cmds:
       - dotnet test dojo.api.sln
