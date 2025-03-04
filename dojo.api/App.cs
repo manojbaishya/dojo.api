@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Dojo.Api;
 
 public class App
@@ -19,6 +21,10 @@ public class App
             dependency.ConfigureServices(builder);
         }
 
+        string dojoApiDb = builder.Configuration.GetConnectionString("DojoApi") ?? throw new InvalidOperationException("Connection string 'DojoApi' not found.");
+
+        builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(dojoApiDb));
+
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         
         builder.Services.AddControllers();
@@ -36,9 +42,18 @@ public class App
             app.MapOpenApi();
         }
 
+        CreateOrMigrateDatabase(app);
+
         app.UseAuthorization();
         app.MapControllers();
-        
+
         return app;
+    }
+    
+    private static void CreateOrMigrateDatabase(WebApplication app)
+    {
+        using var serviceScope = app.Services.CreateScope();
+        var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        context.Database.Migrate();
     }
 }
