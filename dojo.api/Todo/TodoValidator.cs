@@ -4,8 +4,6 @@ public class TodoValidator
 {
     public static bool Validate(TodoDto todoDto)
     {
-        if (todoDto.Name is null) return false;
-        return true;
+        return todoDto.Name is not null;
     }
-
 }

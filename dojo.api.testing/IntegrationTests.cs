@@ -10,8 +10,7 @@ namespace Dojo.Api.Testing;
 
 public class IntegrationTestsFixture : IDisposable
 {
-    public IntegrationTestsFixture() => Factory = new DojoApiFactory<App>();
-    public DojoApiFactory<App> Factory { get; private set; }
+    public DojoApiFactory<App> Factory { get; } = new();
 
     public void Dispose()
     {
@@ -32,7 +31,7 @@ public class DojoApiFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint> wh
     {
         builder.ConfigureTestServices(services =>
         {
-            services.AddSingleton<ITodoService>(serviceProvider => { return new TodoService(Client); });
+            services.AddSingleton<ITodoService>(_ => new TodoService(Client));
         });
     }
 }

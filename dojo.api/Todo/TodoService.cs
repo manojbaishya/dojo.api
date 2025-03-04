@@ -14,20 +14,18 @@ public interface ITodoService
 
 public class TodoService(IRepository<Todo> todoRepository) : ITodoService
 {
-    private readonly IRepository<Todo> _todoRepository = todoRepository;
-
     public async Task<Todo> CreateTodoItem(TodoDto todoDto)
     {
         TodoMapper todoMapper = new();
         Todo todoItem = todoMapper.TodoDtoToTodo(todoDto);
-        return await _todoRepository.Add(todoItem);
+        return await todoRepository.Add(todoItem);
     }
 
-    public async Task<bool> DeleteTodoItem(long id) => await _todoRepository.Delete(id);
+    public async Task<bool> DeleteTodoItem(long id) => await todoRepository.Delete(id);
 
-    public async Task<Todo?> GetTodoItemById(long id) => await _todoRepository.GetById(id);
+    public async Task<Todo?> GetTodoItemById(long id) => await todoRepository.GetById(id);
 
-    public async Task<IList<Todo>> GetTodoItems() => await _todoRepository.GetAll();
+    public async Task<IList<Todo>> GetTodoItems() => await todoRepository.GetAll();
 
     public async Task<bool> UpdateTodoItem(long id, TodoDto todoDto)
     {
@@ -35,6 +33,6 @@ public class TodoService(IRepository<Todo> todoRepository) : ITodoService
         if (todoItem is null) return false;
         TodoMapper todoMapper = new();
         todoMapper.Map(todoDto, todoItem);
-        return await _todoRepository.Update(todoItem);
+        return await todoRepository.Update(todoItem);
     }
 }

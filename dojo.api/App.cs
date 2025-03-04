@@ -11,10 +11,10 @@ public class App
 
     private static WebApplicationBuilder CreateBuilderAndAddServices(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
         IList<IDependencies> dependencies = DomainDependencies.Create();
-        foreach (var dependency in dependencies)
+        foreach (IDependencies dependency in dependencies)
         {
             dependency.ConfigureServices(builder);
         }
@@ -29,7 +29,7 @@ public class App
 
     private static WebApplication BuildAndConfigureApp(WebApplicationBuilder builder)
     {
-        var app = builder.Build();
+        WebApplication app = builder.Build();
 
         if (app.Environment.IsDevelopment())
         {

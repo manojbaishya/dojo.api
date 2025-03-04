@@ -16,15 +16,14 @@ public interface ITodoService
 
 public class TodoService(HttpClient server) : ITodoService
 {
-    private readonly HttpClient _server = server;
+    public async Task<HttpResponseMessage> GetAll() => await server.GetAsync("/api/Todo");
 
-    public async Task<HttpResponseMessage> GetAll() => await _server.GetAsync("/api/Todo");
-
-    public async Task<HttpResponseMessage> GetById(int id) => await _server.GetAsync($"/api/Todo/{id}");
+    public async Task<HttpResponseMessage> GetById(int id) => await server.GetAsync($"/api/Todo/{id}");
 
     public async Task<HttpResponseMessage> Create(TodoDto todoDto)
     {
-        StringContent content = new(todoDto.ToString(), Encoding.UTF8, "application/json");
-        return await _server.PostAsync("/api/Todo", content);
+        string payload = todoDto.ToString();
+        StringContent content = new(payload, Encoding.UTF8, "application/json");
+        return await server.PostAsync("/api/Todo", content);
     }
 }

@@ -7,7 +7,9 @@ public class Todo
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public long Id { get; set; }
+    public long Id { get; init; }
+    
+    [MaxLength(20)]
     public string? Name { get; set; }
     public bool IsComplete { get; set; }
 }

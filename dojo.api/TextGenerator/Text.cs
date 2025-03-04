@@ -2,7 +2,7 @@ using RimuTec.Faker;
 
 namespace Dojo.Api.TextGenerator;
 
-public readonly struct Text(int NumberOfParagraphs)
+public readonly struct Text(int numberOfParagraphs)
 {
-    public readonly ReadOnlyMemory<string> Paragraphs { get; } = Lorem.Paragraphs(NumberOfParagraphs).ToArray();
+    public ReadOnlyMemory<string> Paragraphs { get; } = Lorem.Paragraphs(numberOfParagraphs).ToArray();
 }

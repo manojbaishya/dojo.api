@@ -13,16 +13,15 @@ namespace Dojo.Api.Testing.Todo;
 
 public class TodoIntegrationTests(IntegrationTestsFixture fixture, ITestOutputHelper logger) : IClassFixture<IntegrationTestsFixture>
 {
-    private readonly ITestOutputHelper _logger = logger;
     private readonly ITodoService _todoService = fixture.Factory.Services.GetRequiredService<ITodoService>();
 
     [Fact]
     public async Task GetTodos()
     {
-        // Arramge
+        // Arrange
 
         // Act
-        _logger.WriteLine("Fetching all Todos");
+        logger.WriteLine("Fetching all Todos");
         HttpResponseMessage response = await _todoService.GetAll();
 
         // Assert
@@ -36,7 +35,7 @@ public class TodoIntegrationTests(IntegrationTestsFixture fixture, ITestOutputHe
         TodoDto todo = new("Task 1", false);
 
         // Act
-        _logger.WriteLine("Creating a Todo: ");
+        logger.WriteLine("Creating a Todo: ");
         HttpResponseMessage response = await _todoService.Create(todo);
 
         // Assert
