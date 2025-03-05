@@ -21,6 +21,15 @@ tasks:
   publish:
     cmds:
       - dotnet publish dojo.api.sln -c Release
+  build-image:
+    cmds:
+      - docker build -t manojbaishya/dojo.api -f Dockerfile .
+  upload-image:
+    cmds:
+      - docker push manojbaishya/dojo.api
+  deploy:
+    cmds:
+      - helm upgrade --install dojo-api dojo.api.charts/dojo-api --namespace=app
   test:
     cmds:
       - dotnet test dojo.api.sln

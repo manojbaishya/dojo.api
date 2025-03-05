@@ -15,6 +15,15 @@ public class App
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+        if (builder.Environment.IsProduction())
+        {
+            builder.WebHost.ConfigureKestrel((context, kestrelOptions) =>
+            {
+                IConfigurationSection kestrelConfig = context.Configuration.GetSection("Kestrel");
+                kestrelOptions.Configure(kestrelConfig);
+            });
+        }
+
         IList<IDependencies> dependencies = DomainDependencies.Create();
         foreach (IDependencies dependency in dependencies)
         {
@@ -28,6 +37,7 @@ public class App
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         
         builder.Services.AddControllers();
+        builder.Services.AddHealthChecks();
         builder.Services.AddOpenApi();
 
         return builder;
@@ -46,6 +56,7 @@ public class App
 
         app.UseAuthorization();
         app.MapControllers();
+        app.MapHealthChecks("/health");
 
         return app;
     }

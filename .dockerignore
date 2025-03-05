@@ -1,0 +1,5 @@
+dojo.api/bin
+dojo.api/obj
+dojo.api/Generated
+dojo.api/appsettings.Development.json
+dojo.api/dojo.api.dev.sqlite

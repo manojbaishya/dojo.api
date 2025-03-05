@@ -1,0 +1,11 @@
+meta {
+  name: Health Check
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{protocol}}://{{hostname}}{{port-or-apigw}}/health
+  body: none
+  auth: none
+}
