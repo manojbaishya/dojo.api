@@ -8,4 +8,5 @@ RUN dotnet publish dojo.api.csproj -r linux-x64 -o publish
 FROM mcr.microsoft.com/dotnet/aspnet:9.0.2-noble-chiseled@sha256:ecaecad2614c3c946727a3fc22ef829771ce6527e9d82c639080771c2f67ea0a
 WORKDIR /app
 COPY --from=build /app/publish .
+EXPOSE 8080/tcp
 ENTRYPOINT ["dotnet", "dojo.api.dll"]

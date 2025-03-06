@@ -22,7 +22,6 @@ public class App
         }
 
         string dojoApiDb = builder.Configuration.GetConnectionString("DojoApi") ?? throw new InvalidOperationException("Connection string 'DojoApi' not found.");
-
         builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(dojoApiDb));
 
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
