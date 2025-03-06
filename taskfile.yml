@@ -30,6 +30,9 @@ tasks:
   deploy:
     cmds:
       - helm upgrade --install dojo-api dojo.api.charts/dojo-api --namespace=app
+  uninstall:
+    cmds:
+      - helm uninstall dojo-api --namespace=app
   test:
     cmds:
       - dotnet test dojo.api.sln

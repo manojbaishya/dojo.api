@@ -15,15 +15,6 @@ public class App
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-        if (builder.Environment.IsProduction())
-        {
-            builder.WebHost.ConfigureKestrel((context, kestrelOptions) =>
-            {
-                IConfigurationSection kestrelConfig = context.Configuration.GetSection("Kestrel");
-                kestrelOptions.Configure(kestrelConfig);
-            });
-        }
-
         IList<IDependencies> dependencies = DomainDependencies.Create();
         foreach (IDependencies dependency in dependencies)
         {
