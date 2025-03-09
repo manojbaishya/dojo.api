@@ -29,14 +29,15 @@ autoscaling:
 
 # This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
-  repository: manojbaishya/dojo.api
+  repository: registry.homelab.manojbaishya.dev:30003/manojbaishya/dojo.api
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest@sha256:c7b27d17859b8f3efd6cfe3a1e68df4e69d894295a836998a247426e42a044a9"
+  tag: "latest"
 
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
-imagePullSecrets: []
+imagePullSecrets:
+  - name: harbor-creds
 
 env:
   - name: ASPNETCORE_HTTP_PORTS
